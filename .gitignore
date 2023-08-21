@@ -1,0 +1,7 @@
+### Files only local ###
+
+**/jboss6.4/volume/simtx/
+**/jboss6.4/volume/sicco/
+**/oracledb/volume/
+.env
+

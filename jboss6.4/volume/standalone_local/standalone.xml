@@ -1,0 +1,1033 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<server xmlns="urn:jboss:domain:1.8">
+
+    <extensions>
+        <extension module="org.jboss.as.clustering.infinispan"/>
+        <extension module="org.jboss.as.cmp"/>
+        <extension module="org.jboss.as.connector"/>
+        <extension module="org.jboss.as.deployment-scanner"/>
+        <extension module="org.jboss.as.ee"/>
+        <extension module="org.jboss.as.ejb3"/>
+        <extension module="org.jboss.as.jacorb"/>
+        <extension module="org.jboss.as.jaxr"/>
+        <extension module="org.jboss.as.jaxrs"/>
+        <extension module="org.jboss.as.jdr"/>
+        <extension module="org.jboss.as.jmx"/>
+        <extension module="org.jboss.as.jpa"/>
+        <extension module="org.jboss.as.jsf"/>
+        <extension module="org.jboss.as.jsr77"/>
+        <extension module="org.jboss.as.logging"/>
+        <extension module="org.jboss.as.mail"/>
+        <extension module="org.jboss.as.messaging"/>
+        <extension module="org.jboss.as.naming"/>
+        <extension module="org.jboss.as.pojo"/>
+        <extension module="org.jboss.as.remoting"/>
+        <extension module="org.jboss.as.sar"/>
+        <extension module="org.jboss.as.security"/>
+        <extension module="org.jboss.as.threads"/>
+        <extension module="org.jboss.as.transactions"/>
+        <extension module="org.jboss.as.web"/>
+        <extension module="org.jboss.as.webservices"/>
+        <extension module="org.jboss.as.weld"/>
+    </extensions>
+
+    <system-properties>
+        <property name="sibar.resource_adapter" value="wmq-jmsra.rar"/>
+        <property name="simtx.qsda.hostname" value="mq-docker"/>
+        <property name="simtx.qsda.username" value="app"/>
+        <property name="simtx.qsda.port" value="1414"/>
+        <property name="simtx.qsda.channel" value="DEV.APP.SVRCONN"/>
+        <property name="simtx.qsda.queueManager" value="QSDA"/>
+        <property name="sicco.qsda.hostname" value="mq-docker"/>
+        <property name="sicco.qsda.username" value="app"/>
+        <property name="sicco.qsda.port" value="1414"/>
+        <property name="sicco.qsda.channel" value="DEV.APP.SVRCONN"/>
+        <property name="sicco.qsda.queueManager" value="QSDA"/>
+        <property name="simtx.internetbanking.req.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="simtx.autoatendimento.req.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="simtx.req.autoatendimento_inovador.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="simtx.req.sicuc.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="simtx.req.sibar_consulta_cobranca_bancaria.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="simtx.req.devolucao_ted.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="simtx.autoatendimentoweb.req.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="sicco.segunda_via.req.destination" value="SIMTX.REQ.RESOLVE_PENDENCIA"/>
+        <property name="sicco.recebe_informacao.req.destination" value="SICCO.REQ.RECEBE_INFORMACAO"/>
+        <property name="sicco.gerador_interface.req.destination" value="SIMTX.REQ.SITMO"/>
+        <property name="sicco.rsp.recebe_informacao.destination" value="SICCO.RSP.RECEBE_INFORMACAO_TESTE"/>
+        <property name="pasta.simtx.home" value="/home/jboss/jboss-eap-6.4/docs/simtx_home/"/>
+        <property name="pasta.sicco.home" value="/home/jboss/jboss-eap-6.4/docs/sicco_home/"/>
+        <property name="factory.initial" value="com.sun.jndi.ldap.LdapCtxFactory"/>
+        <property name="provider.url" value="ldap://10.116.92.130:489"/>
+        <property name="principal.dns" value="ou=people,o=caixa"/>
+        <property name="javax.net.ssl.trustStore" value="/home/jboss/jboss-eap-6.4/standalone/configuration/client.truststore.jks"/>
+        <property name="org.jboss.security.ignoreHttpsHost" value="true"/>
+        <property name="simtx.sso.user" value="cli-ser-mai"/>
+        <property name="simtx.sso.auth-server-url" value="https://logindes.caixa.gov.br/auth"/>
+        <property name="simtx.sso.credentials" value="02af15f9-b93b-4153-ac2a-b17487388dfe"/>
+        <property name="testelocal" value=""/>
+        <property name="simtx.sso.resource" value="cli-ser-mtx"/>
+        <property name="simtx.xwmq.channel" value="DEV.APP.SVRCONN"/>
+        <property name="simtx.xwmq.password" value=""/>
+        <property name="simtx.xwmq.port" value="1414"/>
+        <property name="simtx.xwmq.queueManager" value="QSDA"/>
+        <property name="sicco.xwmq.hostname" value="mq-docker"/>
+        <property name="simtx.xwmq.hostname" value="mq-docker"/>
+        <property name="sicco.xwmq.username" value="app"/>
+        <property name="sicco.xwmq.port" value="1414"/>
+        <property name="sicco.xwmq.channel" value="DEV.APP.SVRCONN"/>
+        <property name="sicco.xwmq.queueManager" value="QSDA"/>
+        <property name="sicco.xwmq.password" value=""/>
+        <property name="simtx.xwmq.username" value="app"/>
+        <property name="simtx.xwmq.user" value="app"/>
+        <property name="simtx.req.comprovante.destination" value="SIMTX.REQ.COMPROVANTE_DEV2"/>
+        <property name="jackson.deserialization.whitelist.packages" value="br.gov.caixa"/>
+        <property name="sicco.xwmq.recebe_informacao.req.destination" value="SICCO.REQ.RECEBE_INFORMACAO"/>
+        <property name="sicco.xwmq.segunda_via.req.destination" value="SICCO.REQ.SEGUNDA_VIA"/>
+        <property name="simtx.sso.realm" value="internet"/>
+        <property name="org.apache.cxf.logging.enabled" value="true"/>
+        <property name="cicsweb.user.siatr" value="f965271"/>
+        <property name="cicsweb.password.siatr" value="caneta20"/>
+        <property name="simtx.tarifas.url" value="http://simulador-rest:8080/simtx-simulador/"/>
+        <property name="simtx.cicsweb.url" value="http://host.docker.internal:8077/"/>
+        <property name="simtx.portalapi.apikey" value="l759a3b922364949768a7d49a30012863c"/>
+        <property name="simtx.sicco.lote.url" value="http://sicco:8080"/>
+        <property name="simtx.req.retorno_agendamento_tev.destination" value="SIMTX.REQ.AGENCIA"/>
+        <property name="simtx.sicco.url" value="http://sicco:8080"/>
+        <property name="url.sispi.tarifa" value="http://simulador-rest:8080/simtx-simulador"/>
+        <property name="url.sibar" value="http://simulador-rest:8080/simtx-simulador"/>
+        <property name="url.sispi" value="http://simulador-rest:8080/simtx-simulador"/>
+        <property name="url.sicco" value="http://sicco:8080/"/>
+        <property name="simtx.req.transacoes_lote.destination" value="SIMTX.REQ.TRANSACOES_LOTE"/>
+        <property name="url.simtx.core.webservices" value="http://simtx:8080"/>
+    </system-properties>
+
+
+    <management>
+        <security-realms>
+            <security-realm name="ManagementRealm">
+                <authentication>
+                    <local default-user="$local" skip-group-loading="true"/>
+                    <properties path="mgmt-users.properties" relative-to="jboss.server.config.dir"/>
+                </authentication>
+                <authorization map-groups-to-roles="false">
+                    <properties path="mgmt-groups.properties" relative-to="jboss.server.config.dir"/>
+                </authorization>
+            </security-realm>
+            <security-realm name="ApplicationRealm">
+                <authentication>
+                    <local default-user="$local" allowed-users="*" skip-group-loading="true"/>
+                    <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
+                </authentication>
+                <authorization>
+                    <properties path="application-roles.properties" relative-to="jboss.server.config.dir"/>
+                </authorization>
+            </security-realm>
+        </security-realms>
+        <audit-log>
+            <formatters>
+                <json-formatter name="json-formatter"/>
+            </formatters>
+            <handlers>
+                <file-handler name="file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.server.data.dir"/>
+            </handlers>
+            <logger log-boot="true" log-read-only="false" enabled="false">
+                <handlers>
+                    <handler name="file"/>
+                </handlers>
+            </logger>
+        </audit-log>
+        <management-interfaces>
+            <native-interface security-realm="ManagementRealm">
+                <socket-binding native="management-native"/>
+            </native-interface>
+            <http-interface security-realm="ManagementRealm">
+                <socket-binding http="management-http"/>
+            </http-interface>
+        </management-interfaces>
+        <access-control provider="simple">
+            <role-mapping>
+                <role name="SuperUser">
+                    <include>
+                        <user name="$local"/>
+                    </include>
+                </role>
+            </role-mapping>
+        </access-control>
+    </management>
+
+    <profile>
+        <subsystem xmlns="urn:jboss:domain:logging:1.5">
+            <console-handler name="CONSOLE">
+                <level name="INFO"/>
+                <formatter>
+                    <named-formatter name="COLOR-PATTERN"/>
+                </formatter>
+            </console-handler>
+            <periodic-rotating-file-handler name="sicco-log" autoflush="true">
+                <level name="DEBUG"/>
+                <formatter>
+                    <pattern-formatter pattern="%d{dd/MM/yyyy HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="sicco_log.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <periodic-rotating-file-handler name="simtx-log" autoflush="true">
+                <level name="DEBUG"/>
+                <formatter>
+                    <pattern-formatter pattern="%d{dd/MM/yyyy HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="simtx_log.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <periodic-rotating-file-handler name="FILE" autoflush="true">
+                <formatter>
+                    <named-formatter name="PATTERN"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="server.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <logger category="com.arjuna">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.apache.tomcat.util.modeler">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.jboss.as.config">
+                <level name="DEBUG"/>
+            </logger>
+            <logger category="sun.rmi">
+                <level name="WARN"/>
+            </logger>
+            <logger category="jacorb">
+                <level name="FINEST"/>
+            </logger>
+            <logger category="jacorb.config">
+                <level name="FINEST"/>
+            </logger>
+            <logger category="javax.enterprise.resource.webcontainer.jsf.config">
+                <level name="DEBUG"/>
+            </logger>
+            <logger category="javax.enterprise.resource.webcontainer.jsf.lifecycle">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.hibernate.SQL">
+                <level name="DEBUG"/>
+            </logger>
+            <logger category="org.hibernate.type">
+                <level name="TRACE"/>
+            </logger>
+            <logger category="br.gov.caixa.simtx" use-parent-handlers="false">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="simtx-log"/>
+                </handlers>
+            </logger>
+            <logger category="br.gov.caixa.sicco" use-parent-handlers="false">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="sicco-log"/>
+                </handlers>
+            </logger>
+            <root-logger>
+                <level name="INFO"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILE"/>
+                </handlers>
+            </root-logger>
+            <formatter name="PATTERN">
+                <pattern-formatter pattern="%d{dd/MM/yyyy HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+            <formatter name="COLOR-PATTERN">
+                <pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:cmp:1.1"/>
+        <subsystem xmlns="urn:jboss:domain:datasources:1.2">
+            <datasources>
+                <datasource jta="false" jndi-name="java:jboss/jdbc/SIMTX04" pool-name="oracle_simtx_data_source" enabled="true" use-ccm="false">
+                    <connection-url>jdbc:oracle:thin:@oracledb:1521:ORCLCDB</connection-url>
+                    <driver-class>oracle.jdbc.OracleDriver</driver-class>
+                    <driver>ojdbc-7.jar</driver>
+                    <security>
+                        <user-name>mtx</user-name>
+                        <password>mtx123</password>
+                    </security>
+                    <validation>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>false</background-validation>
+                    </validation>
+                    <timeout>
+                        <set-tx-query-timeout>false</set-tx-query-timeout>
+                        <blocking-timeout-millis>10000</blocking-timeout-millis>
+                        <idle-timeout-minutes>10000</idle-timeout-minutes>
+                        <query-timeout>10000</query-timeout>
+                        <use-try-lock>10000</use-try-lock>
+                        <allocation-retry>10000</allocation-retry>
+                        <allocation-retry-wait-millis>10000</allocation-retry-wait-millis>
+                    </timeout>
+                    <statement>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+                </datasource>
+                <datasource jta="false" jndi-name="java:/jboss/jdbc/SICCO04" pool-name="user-config" enabled="true" use-ccm="false">
+                    <connection-url>jdbc:oracle:thin:@oracledb:1521:ORCLCDB</connection-url>
+                    <driver-class>oracle.jdbc.OracleDriver</driver-class>
+                    <driver>ojdbc-7.jar</driver>
+                    <security>
+                        <user-name>cco</user-name>
+                        <password>cco123</password>
+                    </security>
+                    <validation>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>false</background-validation>
+                    </validation>
+                    <timeout>
+                        <set-tx-query-timeout>false</set-tx-query-timeout>
+                        <blocking-timeout-millis>0</blocking-timeout-millis>
+                        <idle-timeout-minutes>0</idle-timeout-minutes>
+                        <query-timeout>0</query-timeout>
+                        <use-try-lock>0</use-try-lock>
+                        <allocation-retry>0</allocation-retry>
+                        <allocation-retry-wait-millis>0</allocation-retry-wait-millis>
+                    </timeout>
+                    <statement>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+                </datasource>
+            </datasources>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
+            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-enabled="true" scan-interval="5000" auto-deploy-exploded="false"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:ee:1.2">
+            <spec-descriptor-property-replacement>false</spec-descriptor-property-replacement>
+            <jboss-descriptor-property-replacement>true</jboss-descriptor-property-replacement>
+            <annotation-property-replacement>true</annotation-property-replacement>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:ejb3:1.5">
+            <session-bean>
+                <stateless>
+                    <bean-instance-pool-ref pool-name="slsb-strict-max-pool"/>
+                </stateless>
+                <stateful default-access-timeout="5000" cache-ref="simple"/>
+                <singleton default-access-timeout="5000"/>
+            </session-bean>
+            <mdb>
+                <resource-adapter-ref resource-adapter-name="${ejb.resource-adapter-name:hornetq-ra}"/>
+                <bean-instance-pool-ref pool-name="mdb-strict-max-pool"/>
+            </mdb>
+            <pools>
+                <bean-instance-pools>
+                    <strict-max-pool name="slsb-strict-max-pool" max-pool-size="20" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                    <strict-max-pool name="mdb-strict-max-pool" max-pool-size="20" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                </bean-instance-pools>
+            </pools>
+            <caches>
+                <cache name="simple" aliases="NoPassivationCache"/>
+                <cache name="passivating" passivation-store-ref="file" aliases="SimpleStatefulCache"/>
+                <cache name="clustered" passivation-store-ref="infinispan" aliases="StatefulTreeCache"/>
+            </caches>
+            <passivation-stores>
+                <file-passivation-store name="file"/>
+            </passivation-stores>
+            <async thread-pool-name="default"/>
+            <timer-service thread-pool-name="default" default-data-store="default-file-store">
+                <data-stores>
+                    <file-data-store name="default-file-store" path="timer-service-data" relative-to="jboss.server.data.dir"/>
+                </data-stores>
+            </timer-service>
+            <remote connector-ref="remoting-connector" thread-pool-name="default"/>
+            <thread-pools>
+                <thread-pool name="default">
+                    <max-threads count="10"/>
+                    <keepalive-time time="100" unit="milliseconds"/>
+                </thread-pool>
+            </thread-pools>
+            <iiop enable-by-default="false" use-qualified-name="false"/>
+            <default-security-domain value="other"/>
+            <default-missing-method-permissions-deny-access value="true"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:infinispan:1.5">
+            <cache-container name="web" aliases="standard-session-cache" default-cache="local-web" module="org.jboss.as.clustering.web.infinispan">
+                <local-cache name="local-web" batching="true">
+                    <file-store passivation="false" purge="false"/>
+                </local-cache>
+            </cache-container>
+            <cache-container name="hibernate" default-cache="local-query" module="org.jboss.as.jpa.hibernate:4">
+                <local-cache name="entity">
+                    <transaction mode="NON_XA"/>
+                    <eviction strategy="LRU" max-entries="10000"/>
+                    <expiration max-idle="100000"/>
+                </local-cache>
+                <local-cache name="local-query">
+                    <transaction mode="NONE"/>
+                    <eviction strategy="LRU" max-entries="10000"/>
+                    <expiration max-idle="100000"/>
+                </local-cache>
+                <local-cache name="timestamps">
+                    <transaction mode="NONE"/>
+                    <eviction strategy="NONE"/>
+                </local-cache>
+            </cache-container>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jacorb:1.4">
+            <orb socket-binding="jacorb" ssl-socket-binding="jacorb-ssl">
+                <initializers security="identity" transactions="spec"/>
+            </orb>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jaxr:1.1">
+            <connection-factory jndi-name="java:jboss/jaxr/ConnectionFactory"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jaxrs:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:jca:1.1">
+            <archive-validation enabled="true" fail-on-error="true" fail-on-warn="false"/>
+            <bean-validation enabled="true"/>
+            <default-workmanager>
+                <short-running-threads>
+                    <core-threads count="50"/>
+                    <queue-length count="50"/>
+                    <max-threads count="50"/>
+                    <keepalive-time time="10" unit="seconds"/>
+                </short-running-threads>
+                <long-running-threads>
+                    <core-threads count="50"/>
+                    <queue-length count="50"/>
+                    <max-threads count="50"/>
+                    <keepalive-time time="10" unit="seconds"/>
+                </long-running-threads>
+            </default-workmanager>
+            <cached-connection-manager debug="true" error="false"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jdr:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:jmx:1.3">
+            <expose-resolved-model/>
+            <expose-expression-model/>
+            <remoting-connector/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jpa:1.1">
+            <jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jsf:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:jsr77:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:mail:1.2">
+            <mail-session name="java:jboss/mail/Default" jndi-name="java:jboss/mail/Default">
+                <smtp-server outbound-socket-binding-ref="mail-smtp"/>
+            </mail-session>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:messaging:1.4">
+            <hornetq-server>
+                <persistence-enabled>true</persistence-enabled>
+                <journal-type>NIO</journal-type>
+                <journal-min-files>2</journal-min-files>
+
+                <connectors>
+                    <netty-connector name="netty" socket-binding="messaging"/>
+                    <netty-connector name="netty-throughput" socket-binding="messaging-throughput">
+                        <param key="batch-delay" value="50"/>
+                    </netty-connector>
+                    <in-vm-connector name="in-vm" server-id="0"/>
+                </connectors>
+
+                <acceptors>
+                    <netty-acceptor name="netty" socket-binding="messaging"/>
+                    <netty-acceptor name="netty-throughput" socket-binding="messaging-throughput">
+                        <param key="batch-delay" value="50"/>
+                        <param key="direct-deliver" value="false"/>
+                    </netty-acceptor>
+                    <in-vm-acceptor name="in-vm" server-id="0"/>
+                </acceptors>
+
+                <security-settings>
+                    <security-setting match="#">
+                        <permission type="send" roles="guest"/>
+                        <permission type="consume" roles="guest"/>
+                        <permission type="createNonDurableQueue" roles="guest"/>
+                        <permission type="deleteNonDurableQueue" roles="guest"/>
+                    </security-setting>
+                </security-settings>
+
+                <address-settings>
+                    <address-setting match="#">
+                        <dead-letter-address>jms.queue.DLQ</dead-letter-address>
+                        <expiry-address>jms.queue.ExpiryQueue</expiry-address>
+                        <redelivery-delay>0</redelivery-delay>
+                        <max-size-bytes>10485760</max-size-bytes>
+                        <page-size-bytes>2097152</page-size-bytes>
+                        <address-full-policy>PAGE</address-full-policy>
+                        <message-counter-history-day-limit>10</message-counter-history-day-limit>
+                    </address-setting>
+                </address-settings>
+
+                <jms-connection-factories>
+                    <connection-factory name="InVmConnectionFactory">
+                        <connectors>
+                            <connector-ref connector-name="in-vm"/>
+                        </connectors>
+                        <entries>
+                            <entry name="java:/ConnectionFactory"/>
+                        </entries>
+                    </connection-factory>
+                    <connection-factory name="RemoteConnectionFactory">
+                        <connectors>
+                            <connector-ref connector-name="netty"/>
+                        </connectors>
+                        <entries>
+                            <entry name="java:jboss/exported/jms/RemoteConnectionFactory"/>
+                        </entries>
+                    </connection-factory>
+                    <pooled-connection-factory name="hornetq-ra">
+                        <transaction mode="xa"/>
+                        <connectors>
+                            <connector-ref connector-name="in-vm"/>
+                        </connectors>
+                        <entries>
+                            <entry name="java:/JmsXA"/>
+                        </entries>
+                    </pooled-connection-factory>
+                </jms-connection-factories>
+</hornetq-server>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:naming:1.4">
+            <bindings>
+                <external-context name="java:global/remote-hornetq" module="org.jboss.remote-naming" class="javax.naming.directory.InitialDirContext">
+                    <environment>
+                        <property name="java.naming.factory.initial" value="org.jboss.naming.remote.client.InitialContextFactory"/>
+                        <property name="java.naming.provider.url" value="remote://localhost:4447"/>
+                    </environment>
+                </external-context>
+            </bindings>
+            <remote-naming/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:remoting:1.2">
+            <connector name="remoting-connector" socket-binding="remoting"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
+            <resource-adapters>
+                <resource-adapter id="wmq-jmsra.rar">
+                    <archive>
+                        wmq-jmsra.rar
+                    </archive>
+                    <transaction-support>NoTransaction</transaction-support>
+                    <config-property name="connectionConcurrency">
+                        5
+                    </config-property>
+                    <config-property name="traceEnabled">
+                        true
+                    </config-property>
+                    <config-property name="traceLevel">
+                        5
+                    </config-property>
+                    <config-property name="maxConnections">
+                        15
+                    </config-property>
+                    <connection-definitions>
+                        <connection-definition class-name="com.ibm.mq.connector.outbound.ManagedQueueConnectionFactoryImpl" jndi-name="java:jboss/jms/SimtxQueueConnectionFactorySICCO" enabled="true" pool-name="simtx_connection_factory_sicco">
+                            <config-property name="channel">
+                                DEV.APP.SVRCONN
+                            </config-property>
+                            <config-property name="hostName">
+                                mq-docker
+                            </config-property>
+                            <config-property name="transportType">
+                                CLIENT
+                            </config-property>
+                            <config-property name="queueManager">
+                                QSDA
+                            </config-property>
+                            <config-property name="port">
+                                1414
+                            </config-property>
+                            <config-property name="username">
+                                app
+                            </config-property>
+                            <pool>
+                                <min-pool-size>2</min-pool-size>
+                                <max-pool-size>15</max-pool-size>
+                                <prefill>true</prefill>
+                                <flush-strategy>EntirePool</flush-strategy>
+                            </pool>
+                            <security>
+                                <application/>
+                            </security>
+                            <timeout>
+                                <idle-timeout-minutes>1</idle-timeout-minutes>
+                            </timeout>
+                            <validation>
+                                <background-validation>false</background-validation>
+                            </validation>
+                        </connection-definition>
+                        <connection-definition class-name="com.ibm.mq.connector.outbound.ManagedQueueConnectionFactoryImpl" jndi-name="java:jboss/jms/SimtxQueueConnectionFactorySIMTX" enabled="true" pool-name="simtx_connection_factory">
+                            <config-property name="channel">
+                                DEV.APP.SVRCONN
+                            </config-property>
+                            <config-property name="hostName">
+                                mq-docker
+                            </config-property>
+                            <config-property name="transportType">
+                                CLIENT
+                            </config-property>
+                            <config-property name="queueManager">
+                                QSDA
+                            </config-property>
+                            <config-property name="port">
+                                1414
+                            </config-property>
+                            <config-property name="username">
+                                app
+                            </config-property>
+                            <pool>
+                                <max-pool-size>15</max-pool-size>
+                                <prefill>true</prefill>
+                                <flush-strategy>EntirePool</flush-strategy>
+                            </pool>
+                            <security>
+                                <application/>
+                            </security>
+                            <timeout>
+                                <idle-timeout-minutes>1</idle-timeout-minutes>
+                            </timeout>
+                            <validation>
+                                <background-validation>false</background-validation>
+                            </validation>
+                        </connection-definition>
+                        <connection-definition class-name="com.ibm.mq.connector.outbound.ManagedQueueConnectionFactoryImpl" jndi-name="java:jboss/jms/SiccoQueueConnectionFactory" enabled="true" pool-name="sicco_connection_factory">
+                            <config-property name="channel">
+                                DEV.APP.SVRCONN
+                            </config-property>
+                            <config-property name="hostName">
+                                mq-docker
+                            </config-property>
+                            <config-property name="transportType">
+                                CLIENT
+                            </config-property>
+                            <config-property name="queueManager">
+                                QSDA
+                            </config-property>
+                            <config-property name="port">
+                                1414
+                            </config-property>
+                            <config-property name="username">
+                                app
+                            </config-property>
+                            <pool>
+                                <min-pool-size>2</min-pool-size>
+                                <max-pool-size>15</max-pool-size>
+                                <prefill>true</prefill>
+                                <flush-strategy>EntirePool</flush-strategy>
+                            </pool>
+                            <security>
+                                <application/>
+                            </security>
+                            <timeout>
+                                <idle-timeout-minutes>1</idle-timeout-minutes>
+                            </timeout>
+                            <validation>
+                                <background-validation>false</background-validation>
+                            </validation>
+                        </connection-definition>
+                        <connection-definition class-name="com.ibm.mq.connector.outbound.ManagedQueueConnectionFactoryImpl" jndi-name="java:/SimtxConnectionFactory" enabled="true" pool-name="simtx_factory">
+                            <config-property name="channel">
+                                DEV.APP.SVRCONN
+                            </config-property>
+                            <config-property name="hostName">
+                                mq-docker
+                            </config-property>
+                            <config-property name="transportType">
+                                CLIENT
+                            </config-property>
+                            <config-property name="queueManager">
+                                QSDA
+                            </config-property>
+                            <config-property name="port">
+                                1414
+                            </config-property>
+                            <config-property name="username">
+                                app
+                            </config-property>
+                            <pool>
+                                <min-pool-size>2</min-pool-size>
+                                <max-pool-size>15</max-pool-size>
+                                <prefill>true</prefill>
+                                <flush-strategy>EntirePool</flush-strategy>
+                            </pool>
+                            <security>
+                                <application/>
+                            </security>
+                            <timeout>
+                                <idle-timeout-minutes>1</idle-timeout-minutes>
+                            </timeout>
+                            <validation>
+                                <background-validation>false</background-validation>
+                            </validation>
+                        </connection-definition>
+                        <connection-definition class-name="com.ibm.mq.connector.outbound.ManagedQueueConnectionFactoryImpl" jndi-name="java:jboss/jms/XSiccoQueueConnectionFactory" enabled="true" pool-name="sicco_mq_baixa_plataforma_factory">
+                            <config-property name="channel">
+                                DEV.APP.SVRCONN
+                            </config-property>
+                            <config-property name="hostName">
+                                mq-docker
+                            </config-property>
+                            <config-property name="transportType">
+                                CLIENT
+                            </config-property>
+                            <config-property name="queueManager">
+                                QSDA
+                            </config-property>
+                            <config-property name="port">
+                                1414
+                            </config-property>
+                            <config-property name="username">
+                                app
+                            </config-property>
+                            <pool>
+                                <min-pool-size>2</min-pool-size>
+                                <max-pool-size>15</max-pool-size>
+                                <prefill>true</prefill>
+                                <flush-strategy>EntirePool</flush-strategy>
+                            </pool>
+                            <security>
+                                <application/>
+                            </security>
+                            <timeout>
+                                <idle-timeout-minutes>1</idle-timeout-minutes>
+                            </timeout>
+                            <validation>
+                                <background-validation>false</background-validation>
+                            </validation>
+                        </connection-definition>
+                        <connection-definition class-name="com.ibm.mq.connector.outbound.ManagedQueueConnectionFactoryImpl" jndi-name="java:jboss/jms/XSimtxQueueConnectionFactory" enabled="true" pool-name="simtx_mq_baixa_plataforma_factory">
+                            <config-property name="channel">
+                                DEV.APP.SVRCONN
+                            </config-property>
+                            <config-property name="hostName">
+                                mq-docker
+                            </config-property>
+                            <config-property name="transportType">
+                                CLIENT
+                            </config-property>
+                            <config-property name="queueManager">
+                                QSDA
+                            </config-property>
+                            <config-property name="port">
+                                1414
+                            </config-property>
+                            <config-property name="username">
+                                app
+                            </config-property>
+                            <pool>
+                                <min-pool-size>2</min-pool-size>
+                                <max-pool-size>15</max-pool-size>
+                                <prefill>true</prefill>
+                                <flush-strategy>EntirePool</flush-strategy>
+                            </pool>
+                            <security>
+                                <application/>
+                            </security>
+                            <timeout>
+                                <idle-timeout-minutes>1</idle-timeout-minutes>
+                            </timeout>
+                            <validation>
+                                <background-validation>false</background-validation>
+                            </validation>
+                        </connection-definition>
+                    </connection-definitions>
+                    <admin-objects>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_gerador_interface" enabled="true" use-java-context="false" pool-name="rsp_gerador_interface">
+                            <config-property name="baseQueueName">
+                                SIMTX.RSP.SITMO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_segunda_via" enabled="true" use-java-context="false" pool-name="sibar_rsp_cco">
+                            <config-property name="baseQueueName">
+                                SIMTX.RSP.RESOLVE_PENDENCIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_tarifa_consulta" enabled="true" use-java-context="false" pool-name="req_tarifa_consulta">
+                            <config-property name="baseQueueName">
+                                SIRTA.REQ.TARIFA_CONSULTA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_valida_permissao" enabled="true" use-java-context="false" pool-name="rsp_valida_permissao">
+                            <config-property name="baseQueueName">
+                                SIBAR.RSP.VALIDA_PERMISSAO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_tarifa_consulta" enabled="true" use-java-context="false" pool-name="rsp_tarifa_consulta">
+                            <config-property name="baseQueueName">
+                                SIRTA.RSP.TARIFA_CONSULTA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_gerador_interface" enabled="true" use-java-context="false" pool-name="req_gerador_interface">
+                            <config-property name="baseQueueName">
+                                SIMTX.REQ.SITMO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_internetbanking" enabled="true" use-java-context="false" pool-name="rsp_internetbanking">
+                            <config-property name="baseQueueName">
+                                SIMTX.RSP.AGENCIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_segunda_via" enabled="true" use-java-context="false" pool-name="sibar_req_cco">
+                            <config-property name="baseQueueName">
+                                SIMTX.REQ.RESOLVE_PENDENCIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_solicitacao_debito" enabled="true" use-java-context="false" pool-name="java:jboss/jms/rsp_solicitacao_debito">
+                            <config-property name="baseQueueName">
+                                SIBAR.RSP.SOLICITACAO_DEBITO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_autoatendimento_inovador" enabled="true" use-java-context="false" pool-name="rsp_autoatendimento_inovador">
+                            <config-property name="baseQueueName">
+                                SIMTX.RSP.AGENCIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_autoatendimento" enabled="true" use-java-context="false" pool-name="rsp_autoatendimento">
+                            <config-property name="baseQueueName">
+                                SIMTX.RSP.AGENCIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_consulta_cobranca_bancaria" enabled="true" use-java-context="false" pool-name="req_consulta_cobranca_bancaria">
+                            <config-property name="baseQueueName">
+                                SIBAR.REQ.CONSULTA_COBRANCA_BANCARIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_valida_permissao" enabled="true" use-java-context="false" pool-name="req_valida_permissao">
+                            <config-property name="baseQueueName">
+                                SIBAR.REQ.VALIDA_PERMISSAO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_consulta_cobranca_bancaria" enabled="true" use-java-context="false" pool-name="rsp_consulta_cobranca_bancaria">
+                            <config-property name="baseQueueName">
+                                SIBAR.RSP.CONSULTA_COBRANCA_BANCARIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_manutencao_assinatura_eletronica" enabled="true" use-java-context="false" pool-name="req_manutencao_assinatura_eletronica">
+                            <config-property name="baseQueueName">
+                                SIBAR.REQ.MANUTENCAO_ASSINATURA_ELETRONICA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp.multicanal" enabled="true" use-java-context="false" pool-name="rsp_multicanal">
+                            <config-property name="baseQueueName">
+                                SIBAR.RSP.MULTICANAL
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_recebe_informacao" enabled="true" use-java-context="false" pool-name="SICCO.RSP.RECEBE_INFORMACAO">
+                            <config-property name="baseQueueName">
+                                SICCO.RSP.RECEBE_INFORMACAO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_solicitacao_debito" enabled="true" use-java-context="false" pool-name="java:jboss/jms/req_solicitacao_debito">
+                            <config-property name="baseQueueName">
+                                SIBAR.REQ.SOLICITACAO_DEBITO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/xwqm_req_recebe_informacao" enabled="true" use-java-context="false" pool-name="xwqm_req_recebe_informacao">
+                            <config-property name="baseQueueName">
+                                SIBAR.REQ.MULTICANAL
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_sibar_consulta_cobranca_bancaria" enabled="true" use-java-context="false" pool-name="rsp_parser">
+                            <config-property name="baseQueueName">
+                                SIMTX.RSP.AGENCIA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/rsp_manutencao_assinatura_eletronica" enabled="true" use-java-context="false" pool-name="rsp_manutencao_assinatura_eletronica">
+                            <config-property name="baseQueueName">
+                                SIBAR.RSP.MANUTENCAO_ASSINATURA_ELETRONICA
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                        <admin-object class-name="com.ibm.mq.connector.outbound.MQQueueProxy" jndi-name="java:jboss/jms/req_recebe_informacao" enabled="true" use-java-context="false" pool-name="req_recebe_informacao">
+                            <config-property name="baseQueueName">
+                                SICCO.REQ.RECEBE_INFORMACAO
+                            </config-property>
+                            <config-property name="targetClient">
+                                MQ
+                            </config-property>
+                        </admin-object>
+                    </admin-objects>
+                </resource-adapter>
+            </resource-adapters>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:sar:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:security:1.2">
+            <security-domains>
+                <security-domain name="other" cache-type="default">
+                    <authentication>
+                        <login-module code="Remoting" flag="optional">
+                            <module-option name="password-stacking" value="useFirstPass"/>
+                        </login-module>
+                        <login-module code="RealmDirect" flag="required">
+                            <module-option name="password-stacking" value="useFirstPass"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+                <security-domain name="jboss-web-policy" cache-type="default">
+                    <authorization>
+                        <policy-module code="Delegating" flag="required"/>
+                    </authorization>
+                </security-domain>
+                <security-domain name="jboss-ejb-policy" cache-type="default">
+                    <authorization>
+                        <policy-module code="Delegating" flag="required"/>
+                    </authorization>
+                </security-domain>
+                <security-domain name="ldapRealm" cache-type="default">
+                    <authentication>
+                        <login-module code="org.jboss.security.auth.spi.LdapLoginModule" flag="required">
+                            <module-option name="java.naming.factory.initial" value="com.sun.jndi.ldap.LdapCtxFactory"/>
+                            <module-option name="java.naming.provider.url" value="ldap://10.116.92.130:489"/>
+                            <module-option name="java.naming.security.authentication" value="simple"/>
+                            <module-option name="principalDNSuffix" value=",ou=people,o=caixa"/>
+                            <module-option name="principalDNPrefix" value="uid="/>
+                            <module-option name="rolesCtxDN" value="ou=Groups,o=caixa"/>
+                            <module-option name="roleAttributeID" value="cn"/>
+                            <module-option name="roleAttributeIsDN" value="false"/>
+                            <module-option name="uidAttributeID" value="uniqueMember"/>
+                            <module-option name="matchOnUserDN" value="true"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+            </security-domains>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
+        <subsystem xmlns="urn:jboss:domain:transactions:1.5">
+            <core-environment>
+                <process-id>
+                    <uuid/>
+                </process-id>
+            </core-environment>
+            <recovery-environment socket-binding="txn-recovery-environment" status-socket-binding="txn-status-manager"/>
+            <coordinator-environment default-timeout="300"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:web:2.2" default-virtual-server="default-host" native="false">
+            <configuration>
+                <jsp-configuration development="true"/>
+            </configuration>
+            <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>
+            <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" secure="true">
+                <ssl name="https" key-alias="jboss" password="secret" certificate-key-file="${jboss.server.config.dir}/jboss.keystore.jks" protocol="TLSv1" verify-client="want" certificate-file="${jboss.server.config.dir}/jboss.cer"/>
+            </connector>
+            <virtual-server name="default-host" enable-welcome-root="true">
+                <alias name="localhost"/>
+                <alias name="example.com"/>
+            </virtual-server>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:webservices:1.2">
+            <modify-wsdl-address>true</modify-wsdl-address>
+            <wsdl-host>${jboss.bind.address:127.0.0.1}</wsdl-host>
+            <endpoint-config name="Standard-Endpoint-Config"/>
+            <endpoint-config name="Recording-Endpoint-Config">
+                <pre-handler-chain name="recording-handlers" protocol-bindings="##SOAP11_HTTP ##SOAP11_HTTP_MTOM ##SOAP12_HTTP ##SOAP12_HTTP_MTOM">
+                    <handler name="RecordingHandler" class="org.jboss.ws.common.invocation.RecordingServerHandler"/>
+                </pre-handler-chain>
+            </endpoint-config>
+            <client-config name="Standard-Client-Config"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:weld:1.0"/>
+    </profile>
+
+    <interfaces>
+        <interface name="management">
+            <inet-address value="${jboss.bind.address.management:localhost}"/>
+        </interface>
+        <interface name="public">
+            <inet-address value="${jboss.bind.address:localhost}"/>
+        </interface>
+        <interface name="unsecure">
+            <inet-address value="${jboss.bind.address.unsecure:localhost}"/>
+        </interface>
+    </interfaces>
+
+    <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
+        <socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>
+        <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
+        <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9443}"/>
+        <socket-binding name="ajp" port="8009"/>
+        <socket-binding name="http" port="8080"/>
+        <socket-binding name="https" port="8443"/>
+        <socket-binding name="jacorb" interface="unsecure" port="3528"/>
+        <socket-binding name="jacorb-ssl" interface="unsecure" port="3529"/>
+        <socket-binding name="messaging" port="5445"/>
+        <socket-binding name="messaging-group" port="0" multicast-address="${jboss.messaging.group.address:231.7.7.7}" multicast-port="${jboss.messaging.group.port:9876}"/>
+        <socket-binding name="messaging-throughput" port="5455"/>
+        <socket-binding name="remoting" port="4447"/>
+        <socket-binding name="txn-recovery-environment" port="4712"/>
+        <socket-binding name="txn-status-manager" port="4713"/>
+        <outbound-socket-binding name="mail-smtp">
+            <remote-destination host="localhost" port="25"/>
+        </outbound-socket-binding>
+    </socket-binding-group>
+
+</server>

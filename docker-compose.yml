@@ -1,0 +1,207 @@
+  networks:
+    caixa:
+      driver: bridge
+      name: docker-simtx-sicco_caixa
+  services:
+    sicco:
+      build:
+        context: ./jboss6.4
+      container_name: sicco
+      depends_on:
+        - oracledb
+        - mq-docker
+      environment:
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+        - SET_CONTAINER_TIMEZONE=true
+      hostname: sicco
+      networks: 
+        - caixa
+      ports:
+        - ${PORTA_SICCO}
+        - ${PORTA_SICCO_DEBUG}
+        - 38443:8443
+        - 35005:5005
+      volumes:
+        - "./jboss6.4/volume/standalone_local/standalone.xml:/home/jboss/jboss-eap-6.4/standalone/configuration/standalone.xml"
+        - "${FONTES_DES_CAIXA_SICCO_PATH}/sicco/docs/sicco_home:/home/jboss/jboss-eap-6.4/docs/sicco_home"
+        - "${FONTES_DES_CAIXA_SICCO_PATH}/sicco/sicco-ear/target/sicco-ear.ear:/home/jboss/jboss-eap-6.4/standalone/deployments/sicco-ear.ear"
+        #- "${FONTES_DES_CAIXA_SICCO_PATH}/sicco/sicco-rest-api/sicco-comprovantes-api/target/sicco-comprovantes-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/sicco-comprovantes-api.war"
+        #- "${FONTES_DES_CAIXA_SICCO_PATH}/sicco/sicco-web-api/target/sicco-web-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/sicco-web-api.war"
+        #- "${FONTES_DES_CAIXA_SICCO_PATH}/sicco/sicco-rest-api/sicco-comprovantes-api/target/sicco-comprovantes-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/sicco-comprovantes-api.war"
+        #- "${FONTES_DES_CAIXA_SICCO_PATH}/sicco/sicco-processador-lote-ear/target/sicco-processador-lote-ear.ear:/home/jboss/jboss-eap-6.4/standalone/deployments/sicco-processador-lote-ear.ear"
+        #- "${FONTES_DES_CAIXA_SICCO_PATH}/sicco/sicco-receber-transacoes-lote/target/sicco-receber-transacoes-lote.war:/home/jboss/jboss-eap-6.4/standalone/deployments/sicco-receber-transacoes-lote.war"
+        - "./jboss6.4/volume/sicco/log:/home/jboss/jboss-eap-6.4/standalone/log"
+        - "./jboss6.4/volume/sicco/apl:/apl"
+    simtx: 
+      build: 
+        context: ./jboss6.4
+      container_name: simtx
+      depends_on: 
+        - oracledb
+        - mq-docker
+      hostname: simtx
+      networks: 
+        - caixa
+      ports: 
+        - ${PORTA_SIMTX}
+        - ${PORTA_SIMTX_DEBUG}
+        - 28443:8443
+        - 25005:5005
+      environment: 
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+      volumes: 
+        - "./jboss6.4/volume/standalone_local/standalone.xml:/home/jboss/jboss-eap-6.4/standalone/configuration/standalone.xml"
+        - "./jboss6.4/volume/simtx/log:/home/jboss/jboss-eap-6.4/standalone/log"
+        - "${FONTES_DES_CAIXA_SIMTX_PATH}/docs/simtx_home:/home/jboss/jboss-eap-6.4/docs/simtx_home"        
+        - "${FONTES_DES_CAIXA_SIMTX_PATH}/simtx-ear/target/simtx-ear.ear:/home/jboss/jboss-eap-6.4/standalone/deployments/simtx-ear.ear"
+        - "${FONTES_DES_CAIXA_SIMTX_PATH}/simtx-web-api/target/simtx-web-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/simtx-web-api.war"
+        - "${FONTES_DES_CAIXA_SIMTX_PATH}/simtx-rest-api/simtx-pagamento-api/target/simtx-pagamento-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/simtx-pagamento-api.war"
+        - "${FONTES_DES_CAIXA_SIMTX_PATH}/simtx-rest-api/simtx-pagamento-instantaneo-api/target/simtx-pagamento-instantaneo-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/simtx-pagamento-instantaneo-api.war"
+        - "${FONTES_DES_CAIXA_SIMTX_PATH}/simtx-rest-api/simtx-assinatura-multipla-api/target/simtx-assinatura-multipla-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/simtx-assinatura-multipla-api.war"
+        #- "${FONTES_DES_CAIXA_SIMTX_PATH}/simtx-processador-lote-ear/target/simtx-processador-lote-ear.ear:/home/jboss/jboss-eap-6.4/standalone/deployments/simtx-processador-lote-ear.ear"
+        #- "${FONTES_DES_CAIXA_SIMTX_PATH}/simtx-rest-api/simtx-comprovantes-api/target/simtx-comprovantes-api.war:/home/jboss/jboss-eap-6.4/standalone/deployments/simtx-comprovantes-api.war"
+    pagamentopix: 
+      build: 
+        context: ./jboss7.3
+      container_name: pagamentopix
+      environment: 
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+        - SET_CONTAINER_TIMEZONE=true
+      hostname: pagamentopix
+      networks: 
+        - caixa
+      ports: 
+        - ${PORTA_PAGAMENTOPIX}
+        - ${PORTA_PAGAMENTOPIX_DEBUG}
+      privileged: true
+      volumes: 
+        - "./jboss7.3/volume/standalone_local/standalone.xml:/home/jboss/jboss-eap-7.3/standalone/configuration/standalone.xml"
+        #- "${DEVOPS_PAGAMENTOPIX_PATH}/SIMTX-pagamentopix/pagamento-instantaneo-agendado-api/target/pagamento-instantaneo-agendado-api.war:/home/jboss/jboss-eap-7.3/standalone/deployments/pagamento-instantaneo-agendado-api.war"
+        - "${DEVOPS_PAGAMENTOPIX_PATH}/SIMTX-pagamentopix/pagamento-instantaneo-agendado-api/target/pagamento-instantaneo-agendado-api.war:/home/jboss/jboss-eap-7.3/standalone/deployments/pagamento-instantaneo-agendado-api.war"
+        #- "${DEVOPS_PAGAMENTOPIX_PATH}/SIMTX-pagamentopix/pagamento-instantaneo-batch/target/pagamento-instantaneo-batch.war:/home/jboss/jboss-eap-7.3/standalone/deployments/pagamento-instantaneo-batch.war"
+
+    simulador-rest: 
+      build: 
+        context: ./jboss7.3
+      container_name: simulador-rest
+      environment: 
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+        - SET_CONTAINER_TIMEZONE=true
+      hostname: simulador-rest
+      networks: 
+        - caixa
+      ports: 
+        - ${PORTA_SIMULADOR_REST}
+        - ${PORTA_SIMULADOR_REST_DEBUG}
+      volumes: 
+        - "${SIMULADOR_REST}/simtx-services/target/simtx-simulador.war:/home/jboss/jboss-eap-7.3/standalone/deployments/simtx-simulador.war"
+    agendamento: 
+      build: 
+        context: ./jboss7.3
+      container_name: agendamento
+      environment: 
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+        - SET_CONTAINER_TIMEZONE=true
+      hostname: agendamento
+      networks: 
+        - caixa
+      ports: 
+        - ${PORTA_AGENDAMENTO}
+        - ${PORTA_AGENDAMENTO_DEBUG}
+      privileged: true
+      volumes: 
+        - "./jboss7.3/volume/standalone_local/standalone.xml:/home/jboss/jboss-eap-7.3/standalone/configuration/standalone.xml"
+    pec: 
+      build: 
+        context: ./jboss7.3
+      container_name: pec
+      environment: 
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+        - SET_CONTAINER_TIMEZONE=true
+      hostname: pec
+      networks: 
+        - caixa
+      ports: 
+        - ${PORTA_PEC}
+        - ${PORTA_PEC_DEBUG}
+      privileged: true
+      volumes: 
+        - "${DEVOPS_ARRECADACAO_PATH}/SIMTX-arrecadacao/pec-generico-api/target/pec-generico-api.war:/home/jboss/jboss-eap-7.3/standalone/deployments/pec-generico-api.war"
+        - "./jboss7.3/volume/standalone_local/standalone.xml:/home/jboss/jboss-eap-7.3/standalone/configuration/standalone.xml"
+    desfazimento: 
+      build: 
+        context: ./jboss7.3
+      container_name: desfazimento
+      environment: 
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+        - SET_CONTAINER_TIMEZONE=true
+      hostname: desfazimento
+      networks: 
+        - caixa
+      ports: 
+        - ${PORTA_DESFAZIMENTO}
+        - ${PORTA_DESFAZIMENTO_DEBUG}
+      privileged: true
+      volumes: 
+        - "${DEVOPS_ARRECADACAO_PATH}/SIMTX-desfazimento/desfazimento-tarefas-api/target/desfazimento-tarefas-api.war:/home/jboss/jboss-eap-7.3/standalone/deployments/desfazimento-tarefas-api.war"
+        - "./jboss7.3/volume/standalone_local/standalone.xml:/home/jboss/jboss-eap-7.3/standalone/configuration/standalone.xml"
+    investimento: 
+      build: 
+        context: ./jboss7.3
+      container_name: investimento
+      environment: 
+        - CONTAINER_TIMEZONE=America/Sao_Paulo
+        - SET_CONTAINER_TIMEZONE=true
+      hostname: pec
+      networks: 
+        - caixa
+      ports: 
+        - "58085:8080"
+        - "58786:8787"
+      privileged: true
+      volumes: 
+        #- "${DEVOPS_INVESTIMENTO_PATH}/SIMTX-investimento/investimento-api/target/investimento-api.war:/home/jboss/jboss-eap-7.3/standalone/deployments/investimento-api.war"
+        - "${DEVOPS_INVESTIMENTO_PATH}/SIMTX-investimento/simtx-investimento-api/target/simtx-investimento-api.war:/home/jboss/jboss-eap-7.3/standalone/deployments/simtx-investimento-api.war"
+        - "./jboss7.3/volume/standalone_local/standalone.xml:/home/jboss/jboss-eap-7.3/standalone/configuration/standalone.xml"
+    simulador-mq:
+       build: 
+         context: ./simulador-mq
+       container_name: simulador-mq
+       hostname: simulador-mq
+       networks: 
+         - caixa
+       ports: 
+         - ${PORTA_SIMULADOR_MQ}
+         - 8888:8888
+         - 5005:5005
+    mq-docker: 
+      build: 
+        context: ./mq
+      container_name: mq-docker
+      environment: 
+        LICENSE: accept
+        MQ_DEV: "true"
+        MQ_QMGR_NAME: QSDA
+      hostname: mq-docker
+      networks: 
+        - caixa
+      ports:
+        - "9443:9443"
+        - "1414:1414"
+      privileged: true
+    oracledb:
+      build: 
+        context: ./oracledb
+      container_name: oracledb
+      hostname: oracledb
+      networks: 
+        - caixa
+      ports:
+        - "31521:1521"
+        - "35500:5500"
+      volumes:
+        - "./oracledb/volume/ORCL:/ORCL"
+      networks: 
+        - caixa
+  version: "3.7"
+  
